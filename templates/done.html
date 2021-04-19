@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    {% load static %}
+<!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'done' %}">
+        <img src="..." class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li
+              {% if '/' == request.path %}
+                  class="nav-item active mr-3"
+              {% else%}
+                  class="nav-item  mr-3"
+              {% endif %}
+          >
+            <a class="nav-link" href="{% url 'done' %}">Home</a>
+          </li>
+          <li
+              {% if  'login' in request.path %}
+                  class="nav-item active mr-3"
+              {% else%}
+                  class="nav-item  mr-3"
+              {% endif %}
+          >
+            <a class="nav-link" href="{% url 'done' %}">About</a>
+          </li>
+          <li
+              {% if  'login' in request.path %}
+                  class="nav-item active mr-3"
+              {% else%}
+                  class="nav-item  mr-3"
+              {% endif %}
+          >
+            <a class="nav-link" href="{% url 'done' %}">Featured Listings</a>
+          </li>
+            </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li
+                         {% if  'login' in request.path %}
+                          class="nav-item active mr-3"
+                        {% else%}
+                          class="nav-item  mr-3"
+                        {% endif %}
+                  >
+                    <a class="nav-link" href="{% url 'done' %}">
+                      welcome {{ user.username}}:Dashboard</a>
+                  </li >
+                  <li class="nav-item mr-3">
+                    <a href="javascript:{document.getElementById('logout').submit() } "  class="nav-link">
+                        <li class="fas fa-sign-out-alt "></li> logout </a>
+                    <form action="{% url 'done' %} " method="POST" id="logout">
+                        {% csrf_token %} <input type="hidden">
+                    </form>
+            </li>
+
+            {% else%}
+
+                  <li
+                         {% if  'login' in request.path %}
+                          class="nav-item active mr-3"
+                        {% else%}
+                          class="nav-item  mr-3"
+                        {% endif %}
+                  >
+                    <a class="nav-link" href="{% url 'login' %}">
+                      <i class="fas fa-user-plus"></i> Register</a>
+                  </li>
+                  <li
+                     {% if  'login' in request.path %}
+                          class="nav-item active mr-3"
+                      {% else%}
+                          class="nav-item  mr-3"
+                      {% endif %}
+                  >
+                    <a class="nav-link" href="{% url 'login' %}">
+                      <i class="fas fa-sign-in-alt"></i>
+
+                      Login</a>
+                  </li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    {% for d in data %}
+    {{d.phone}}
+    {% endfor %}
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
